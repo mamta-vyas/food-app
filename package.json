@@ -1,0 +1,29 @@
+{
+  "name": "foodapp",
+  "version": "1.0.0",
+  "description": " This is Food App by Mamta Vyas",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamta-vyas/food-app.git"
+  },
+  "keywords": [],
+  "author": "Mamta Vyas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mamta-vyas/food-app/issues"
+  },
+  "homepage": "https://github.com/mamta-vyas/food-app#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "reactdom": "^2.0.0"
+  }
+}
