@@ -4,6 +4,8 @@
   "description": " This is Food App by Mamta Vyas",
   "main": "App.js",
   "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
@@ -20,11 +22,12 @@
   "devDependencies": {
     "parcel": "^2.12.0",
     "postcss": "^8.4.40",
+    "process": "^0.11.10",
     "tailwindcss": "^3.4.7"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "reactdom": "^2.0.0"
+    "react-router-dom": "^6.26.0"
   }
 }

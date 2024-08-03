@@ -1,22 +1,25 @@
 
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-
+import { RESTAURANT_LIST_API } from "../utils/constants";
 const Body = () => {
 
 //local state variable - super powerful variable
 const [listOfRestaurants ,setListOfRestaurants] = useState([]);
+const [filteredRestaurants , setFilteredRestaurants] = useState([]);
 // now removing resList from useState(resList)
   // setListOfRestaurants();
 
-  const [searchText , setSeachText] = useState("");
-  const [filteredRestaurants , setFilteredRestaurants] = useState([]);
 
+  const [searchText , setSeachText] = useState("");
+
+//  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+  
   // whenever state variables update, react triggers reconciliation cycle(re-renders the component)
-   console.log("Body rendered")  ;
+  //  console.log("Body rendered", listOfRestaurants)  ;
 
 useEffect(()=>{
  fetchData();
@@ -25,15 +28,13 @@ useEffect(()=>{
 // console.log("body rendered");
 
 const fetchData = async  () => {
-    const data = await fetch(
-    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING" 
-    );
+    const data = await fetch(RESTAURANT_LIST_API);
      
     const json = await data.json();
     console.log(json);
     // now we are using optional chaining by using(?)
-    setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFilteredRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 };
 // if statement conditional statement
 // if(listOfRestaurants.length === 0)
@@ -51,15 +52,16 @@ if(onlineStatus === false)
     Looks like you're offline!! Please check your internet connection;
    </h1>);
  
+ 
 
 
-  return listOfRestaurants.length === 0 ? <Shimmer /> : (
+  return listOfRestaurants.length === 0 ? (<Shimmer/>) : (
       <div className="body">
-          <div className="filter">
-        <div className="search">
-          <input type="text" className="search-box" value={searchText} onChange={(e) => {setSeachText(e.target.value)}}
+          <div className="filter flex">
+        <div className="search m-4 p-4">
+          <input type="text" className="border border-solid border-black" value={searchText} onChange={(e) => {setSeachText(e.target.value)}}
           />
-          <button onClick={() => {
+          <button className="px-4 py-2 bg-green-100 m-4 rounded-xl" onClick={() => {
             // filter the res-cards and update the UI.
               console.log(searchText);
 
@@ -72,8 +74,8 @@ if(onlineStatus === false)
           }}
           >search</button>
         </div>
-      
-              <button className="filter-btn" onClick={() => { 
+      <div className="search m-4 p-4 flex items-center">
+      <button className="px-4 py-2 bg-gray-100 rounded-lg" onClick={() => { 
                 //filter logic here
                 const filteredList= listOfRestaurants.filter((Element) => Element.info.avgRating > 4.4);
                   //  console.log(listOfRestaurants);
@@ -83,10 +85,19 @@ if(onlineStatus === false)
                   >
                     Top Rated Restaurants
                     </button>
+      </div>
+              
         </div>
-        <div className="res-container">
+        <div className="flex flex-wrap">
        {filteredRestaurants.map((restaurant)=>(
-          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id} >    <RestaurantCard  resData={restaurant}/>
+          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}> 
+          {/* if the restraunt is promoted then add a label to it */}
+        {/* {restaurant.info.isOpen ? (<RestaurantCardPromoted resdata={restaurant}/>): */}
+       
+        {/* } */}
+          {/* <RestaurantCard  resData={restaurant}/> */}
+
+          <RestaurantCard resData = {restaurant}/>
           </Link>
         ))}
         </div>

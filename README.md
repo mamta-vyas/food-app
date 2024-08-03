@@ -1,4 +1,5 @@
 # food app
+
 # parcel
 -Dev Build
 -Local Server
@@ -33,7 +34,7 @@ Different dev prod bundles
   // resData?.data this is done by optional chaining
 
   // type: "restaurants"
-//   <RestaurantCard
+//   <RestaurantCards
 //   resName="Meghana Food"
 //   cuisine="aloo puff,cheese puff, italian, north indian"
 // />
@@ -92,3 +93,13 @@ console.log("useeffect Called")});
 and callback function is called after components rendered.
 
 when we return useeffect inside body component  so when body component load it will first render all the  component after rendering cycle finish  of all the component  then it will quickly  call the callback function which is inside useeffect.  
+
+# "reactdom": "^2.0.0"
+
+# Redux Toolkit
+-Install @reduxjs/toolkit Libraries and react-redux libraries
+-Build our store
+-Connect our store to our app
+-Slice(cartSlice)
+-dispatch(action)
+-Selector

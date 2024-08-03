@@ -6,7 +6,7 @@ import RestaurantCard from "./components/RestaurantCard.js";
 import About from "./components/About.js";
 import ContactUs from "./components/ContactUs.js";
 import Error from "./components/Error.js";
-import { createBrowserRouter , Outlet, RouterProvider } from "react-router-dom";
+import {createBrowserRouter , Outlet, RouterProvider } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 // import Grocery from "./components/Grocery.js";
 //  chunking

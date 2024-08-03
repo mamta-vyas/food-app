@@ -27,7 +27,7 @@ useEffect(() => {
   //   },[]]);
 
     return (
-      <div className="flex justify-between">
+  <div className="flex justify-between shadow-lg bg-pink-100 sm:bg-yellow-50 lg:bg-green-100">
         <div className=" ">
           <img
             className="w-56"
@@ -36,20 +36,20 @@ useEffect(() => {
         </div>
         <div className="nav-items">
           <ul className="flex p-4 m-4">
-            <li>
+            <li className="px-4">
               Online Status : { onlineStatus ? "✅" : "🔴"}
             </li>
-            <li>
+            <li className="px-4">
               <Link to="/">Home</Link>
               </li>
-            <li>
+            <li className="px-4">
          <Link to="/about">About us</Link>
               </li>
-            <li>
+            <li className="px-4">
           <Link to ="/grocery"> Grocery</Link>
             </li>
-            <li> <Link to="/contactus">Contact Us</Link></li>
-            <li>cart</li>
+            <li className="px-4"> <Link to="/contactus">Contact Us</Link></li>
+            <li className="px-4">cart</li>
             <button className="login-btn" onClick={() => { btnNameReact === "login" ? setBtnNameReact("logout") : setBtnNameReact("login")}}>{btnNameReact}</button>
          
           
