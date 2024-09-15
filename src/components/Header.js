@@ -1,7 +1,8 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState , useEffect } from "react";
+import { useState , useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/userContext";
 
 // hooks or usestate or state variable will only be called and initialized in function component it can't br called on if ,else (js aloows this) or for loop or any function or it canit be called outside of function component.
 
@@ -16,6 +17,9 @@ const onlineStatus = useOnlineStatus();
 // useEffect(() => {
 // console.log("useEffecet called");
 // });
+
+
+const {loggedInUser} = useContext(UserContext);
 
 // if there is empty dependency array then useeffect will be called only on initial render(just once).
 useEffect(() => {
@@ -52,7 +56,7 @@ useEffect(() => {
             <li className="px-4">cart</li>
             <button className="login-btn" onClick={() => { btnNameReact === "login" ? setBtnNameReact("logout") : setBtnNameReact("login")}}>{btnNameReact}</button>
          
-          
+          <li className="px-4 font-bold">{loggedInUser}</li>
           </ul>
         
         </div>
