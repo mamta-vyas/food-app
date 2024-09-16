@@ -9,6 +9,7 @@ import Error from "./components/Error.js";
 import {createBrowserRouter , Outlet, RouterProvider } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import UserContext from "./utils/userContext.js";
+import appStore from "./utils/appStore.js";
 // import Grocery from "./components/Grocery.js";
 //  chunking
 //  code splitting
@@ -21,6 +22,8 @@ import UserContext from "./utils/userContext.js";
 // so it will create grocery.js  a saparate file in network of inspect 
 const Grocery = lazy(() => import ("./components/Grocery.js"));
 import UserContext from "src/utils/userContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 
 const AppLayout = () => {
    const[userName, setUserName] = useState();
@@ -36,33 +39,42 @@ const {loggedInUser} = useContext(UserContext);
   }, [])
 
 return (
+<Provider store={appStore} >
+<UserContext.Provider value ={{loggedInUser : userName , setUserName}}>
+<div className="app" >
+<Header />
+<Outlet/>
+</div>
+</UserContext.Provider></Provider>
+  );
+};
   // by using userContext we are over writiing the Default value if we want to bind only Header then mamta kumari vyas only shown to header and other places it will show default value of loggedin and if i want to change value i can do it
   // here Default value
   // <UserContext.Provider value ={{loggedInUser}} >
-  <UserContext.Provider value ={{loggedInUser : userName , setUserName}}>
-    <div className="app" >
+  // <UserContext.Provider value ={{loggedInUser : userName , setUserName}}>
+    {/* <div className="app" > */}
        {/* here mamta kumari vyas */}
       {/* <UserContext.Provider value ={{loggedInUser : userName}}> */}
-      <Header />
+      // <Header />
       {/* </UserContext.Provider> */}
       {/* here value will be swati vyas */}
       {/* <UserContext.Provider value={{loggedInUser: "Swati Vyas"}}> */}
-     <Outlet/>
+    //  <Outlet/>
      {/* </UserContext.Provider> */}
-    </div>
-    </UserContext.Provider>
-           );
-          };
+    {/* </div> */}
+    {/* </UserContext.Provider> */}
+          {/* //  ); */}
+          {/* // }; */}
 
     {/* i want my header to be intact */}
-      // <Header />
+      {/* // <Header /> */}
 {/* i want only my body component will chANGE HERE SO WE USE  CHILDERN ROUTES so we can access about and contact us page (means i want to push childern according to route)  so we need to use "outlet" component*/}
-      // <Outlet/>
-    // </div>
-  // );
-// };
-//  below is a configuration which we need to provide so we use routerprovider.
-// this is an array of objects which diffines a different path
+      {/* // <Outlet/> */}
+    {/* // </div> */}
+  {/* // ); */}
+{/* // }; */}
+{/* //  below is a configuration which we need to provide so we use routerprovider. */}
+{/* // this is an array of objects which diffines a different path */}
 
 
 const appRouter = createBrowserRouter([

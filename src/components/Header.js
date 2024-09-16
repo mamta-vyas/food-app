@@ -3,6 +3,7 @@ import { useState , useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 // hooks or usestate or state variable will only be called and initialized in function component it can't br called on if ,else (js aloows this) or for loop or any function or it canit be called outside of function component.
 
@@ -30,6 +31,11 @@ useEffect(() => {
   //   console.log("useEffecet called");
   //   },[]]);
 
+  //Subscribing to the store using  useSelector 
+
+  const cartItems = useSelector((store) => store.cart.items);
+
+
     return (
   <div className="flex justify-between shadow-lg bg-pink-100 sm:bg-yellow-50 lg:bg-green-100">
         <div className=" ">
@@ -53,7 +59,7 @@ useEffect(() => {
           <Link to ="/grocery"> Grocery</Link>
             </li>
             <li className="px-4"> <Link to="/contactus">Contact Us</Link></li>
-            <li className="px-4">cart</li>
+            <li className="px-4 font-bold text-xl">cart - ({cartItems.length} items)</li>
             <button className="login-btn" onClick={() => { btnNameReact === "login" ? setBtnNameReact("logout") : setBtnNameReact("login")}}>{btnNameReact}</button>
          
           <li className="px-4 font-bold">{loggedInUser}</li>
